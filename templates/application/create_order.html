@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+    Создание заказа
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <form action="{% url 'order_create' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <table>
+                {% for field in form %}
+                    <tr>
+                        <td>
+                            {{ field.label }}
+                        </td>
+                        <td>
+                            {{ field }}
+                        </td>
+                    </tr>
+                    {% for error in field.errors %}
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>
+                                {{ error }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+                <tr>
+                    <td>
+                        <button type="submit">Разместить</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    {% endif %}
+{% endblock %}
